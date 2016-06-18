@@ -58,8 +58,11 @@ public class ImageUtility {
 
     public static Uri savePicture(Context context, Bitmap bitmap) {
         int cropHeight;
-        if (bitmap.getHeight() > bitmap.getWidth()) cropHeight = bitmap.getWidth();
-        else                                        cropHeight = bitmap.getHeight();
+        if (bitmap.getHeight() > bitmap.getWidth()) {
+            cropHeight = bitmap.getWidth();
+        } else {
+            cropHeight = bitmap.getHeight();
+        }
 
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, cropHeight, cropHeight, ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 
@@ -119,6 +122,7 @@ public class ImageUtility {
 
         return BitmapFactory.decodeFile(path, options);
     }
+
     /**
      * Decode and sample down a bitmap from a byte stream
      */
@@ -165,7 +169,7 @@ public class ImageUtility {
      * bitmaps using the decode* methods from {@link android.graphics.BitmapFactory}. This implementation calculates
      * the closest inSampleSize that is a power of 2 and will result in the final decoded bitmap
      * having a width and height equal to or larger than the requested width and height
-     *
+     * <p/>
      * The function rounds up the sample size to a power of 2 or multiple
      * of 8 because BitmapFactory only honors sample size this way.
      * For example, BitmapFactory downsamples an image by 2 even though the
