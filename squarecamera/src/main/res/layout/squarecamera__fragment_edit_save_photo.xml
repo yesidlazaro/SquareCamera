@@ -8,32 +8,44 @@
     <View
         android:id="@+id/topView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp" />
 
     <com.desmond.squarecamera.SquareImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/topView"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
-    <ImageButton
-        android:id="@+id/save_photo"
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/squarecamera__save_photo_drawable"
-        android:background="@android:color/transparent"
-        android:layout_centerHorizontal="true"/>
+        android:paddingBottom="@dimen/squarecamera__spacing_normal"
+        android:paddingLeft="@dimen/squarecamera__padding_normal"
+        android:paddingRight="@dimen/squarecamera__padding_normal"
+        android:paddingTop="@dimen/squarecamera__spacing_normal">
 
-    <ImageButton
-        android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:src="@drawable/squarecamera__cancel_drawable"
-        android:background="@android:color/transparent"
-        android:onClick="onCancel"/>
+        <ImageButton
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/squarecamera__cancel_button"
+            android:onClick="onCancel"
+            android:padding="@dimen/squarecamera__spacing_micro"
+            android:src="@drawable/squarecamera__cancel" />
+
+        <ImageButton
+            android:id="@+id/save_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/squarecamera__accept_button"
+            android:padding="@dimen/squarecamera__padding_normal"
+            android:src="@drawable/squarecamera__accept" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

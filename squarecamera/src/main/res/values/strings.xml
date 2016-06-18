@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="squarecamera__app_name">SquareCamera</string>
+    <string name="squarecamera__app_name">Vendiste</string>
     <string name="squarecamera__action_settings">Settings</string>
     <string name="squarecamera__start_image_capture">Take New Picture!</string>
     <string name="squarecamera__capture_image">Snap It!</string>

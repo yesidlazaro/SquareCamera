@@ -4,4 +4,8 @@
     <color name="squarecamera__pressed_red">#B3F0001D</color>
     <color name="squarecamera__white">#FFFFFF</color>
     <color name="squarecamera__pressed_white">#99FFFFFF</color>
+    <!-- Colors for the app -->
+    <color name="squarecamera__light_blue_500">#03A9F4</color>
+    <color name="squarecamera__light_blue_600">#039BE5</color>
+    <color name="squarecamera__light_blue_700">#0288D1</color>
 </resources>
