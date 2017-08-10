@@ -2,7 +2,8 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-SquareCamera-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1745)
 ## Description
 Android module that takes a square photo using the native Android Camera APIs. The new Camera2 APIs from the L release is not used because support has to go back to SDK version 14 for my own requirement. 
-
+## New 
+-recent photos from gallery 
 ## Features
 - Tap to focus
 - Two fingers zooming
@@ -10,6 +11,7 @@ Android module that takes a square photo using the native Android Camera APIs. T
 - Flash mode (Saved when the user exits)
 - Supports both portrait & landscape
 - Runtime permission is supported for saving/viewing photos
+-recent photos from gallery 
 
 ## SDK Support
 Support from SDK version 14 onwards
