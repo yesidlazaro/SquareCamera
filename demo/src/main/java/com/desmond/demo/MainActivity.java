@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void requestForCameraPermission(View view) {
         final String permission = Manifest.permission.CAMERA;
+        final String permissionGallery = Manifest.permission.READ_EXTERNAL_STORAGE;
         if (ContextCompat.checkSelfPermission(MainActivity.this, permission)
+                != PackageManager.PERMISSION_GRANTED&&ContextCompat.checkSelfPermission(MainActivity.this, permissionGallery)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permission)) {
                 showPermissionRationaleDialog("Test", permission);
