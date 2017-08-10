@@ -16,6 +16,8 @@ Support from SDK version 14 onwards
 
 ## Download
 jitpack:
+[![](https://jitpack.io/v/yesidlazaro/SquareCamera.svg)](https://jitpack.io/#yesidlazaro/SquareCamera)
+
 ```
 allprojects {
         repositories {
@@ -25,7 +27,7 @@ allprojects {
     }
 
 dependencies {
-    compile 'com.github.yesidlazaro:SquareCamera:1.1.2'
+    compile 'com.github.yesidlazaro:SquareCamera:{latest-version}'
 }
 ```
 
