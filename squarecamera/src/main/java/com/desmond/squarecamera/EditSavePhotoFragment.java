@@ -44,7 +44,8 @@ public class EditSavePhotoFragment extends Fragment {
         return fragment;
     }
 
-    public EditSavePhotoFragment() {}
+    public EditSavePhotoFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,7 +129,7 @@ public class EditSavePhotoFragment extends Fragment {
                 Bitmap bitmap = ((BitmapDrawable) photoImageView.getDrawable()).getBitmap();
                 Uri photoUri = ImageUtility.savePicture(getActivity(), bitmap);
 
-                ((CameraActivity) getActivity()).returnPhotoUri(photoUri);
+                ((CameraActivity) getActivity()).returnPhotoUri(photoUri, false);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

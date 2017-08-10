@@ -1,5 +1,5 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:last="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,74 +8,89 @@
     <com.desmond.squarecamera.SquareCameraPreview
         android:id="@+id/camera_preview_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <View
         android:id="@+id/cover_top_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/squarecamera__cover_start_height"
-        android:layout_alignTop="@id/camera_preview_view"
-        android:background="@android:color/black"/>
+        android:background="@android:color/black" />
 
     <View
         android:id="@+id/cover_bottom_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/squarecamera__cover_start_height"
-        android:layout_alignBottom="@id/camera_preview_view"
-        android:background="@android:color/black"/>
+        android:background="@android:color/black" />
 
     <LinearLayout
         android:id="@+id/camera_tools_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/camera_preview_view"
-        android:layout_alignParentBottom="true"
-        android:padding="10dp"
-        android:orientation="horizontal"
+        android:layout_gravity="bottom"
         android:background="@android:color/black"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/change_camera"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/squarecamera__camera"
-            android:layout_weight="1"/>
-
-        <ImageView
-            android:id="@+id/capture_image_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/squarecamera__capture_photo_button"
-            android:layout_weight="1"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center_horizontal"
+            tools:background="@android:color/white"
+            tools:listitem="@layout/photos_list_item" />
 
         <LinearLayout
-            android:id="@+id/flash"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:background="@android:color/black"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <ImageView
-                android:id="@+id/flash_icon"
-                android:layout_width="wrap_content"
+                android:id="@+id/change_camera"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/squarecamera__toggle_flash" />
+                android:layout_weight="1"
+                android:src="@drawable/squarecamera__camera" />
 
-            <TextView
-                android:id="@+id/auto_flash_icon"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/capture_image_button"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_gravity="center_vertical"
-                android:text="Auto"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"/>
+                android:layout_weight="1"
+                android:src="@drawable/squarecamera__capture_photo_button" />
 
+            <LinearLayout
+                android:id="@+id/flash"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/flash_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/squarecamera__toggle_flash" />
+
+                <TextView
+                    android:id="@+id/auto_flash_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Auto"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
         </LinearLayout>
+
 
     </LinearLayout>
 
-</RelativeLayout>
+
+</FrameLayout>

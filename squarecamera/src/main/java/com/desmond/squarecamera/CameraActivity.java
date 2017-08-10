@@ -8,7 +8,7 @@ import android.view.View;
 
 
 public class CameraActivity extends AppCompatActivity {
-
+    public static final String KEY_FROM_GALLERY = "KEY_FROM_GALLERY";
     public static final String TAG = CameraActivity.class.getSimpleName();
 
     @Override
@@ -29,8 +29,9 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    public void returnPhotoUri(Uri uri) {
+    public void returnPhotoUri(Uri uri, boolean fromGallery) {
         Intent data = new Intent();
+        data.putExtra(KEY_FROM_GALLERY, fromGallery);
         data.setData(uri);
 
         if (getParent() == null) {

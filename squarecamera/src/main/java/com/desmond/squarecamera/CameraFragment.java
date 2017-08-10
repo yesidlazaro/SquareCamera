@@ -15,6 +15,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.OrientationEventListener;
@@ -45,9 +48,9 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     private Camera mCamera;
     private SquareCameraPreview mPreviewView;
     private SurfaceHolder mSurfaceHolder;
-
+    private RecyclerView recyclerViewGallery;
     private boolean mIsSafeToTakePhoto = false;
-
+    private ImageGalleryAdapter imageGalleryAdapter;
     private ImageParameters mImageParameters;
 
     private CameraOrientationListener mOrientationListener;
@@ -56,7 +59,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         return new CameraFragment();
     }
 
-    public CameraFragment() {}
+    public CameraFragment() {
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -84,14 +88,26 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.squarecamera__fragment_camera, container, false);
+        View view = inflater.inflate(R.layout.squarecamera__fragment_camera, container, false);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mOrientationListener.enable();
-
+        recyclerViewGallery = (RecyclerView) view.findViewById(R.id.recyclerview);
+        recyclerViewGallery.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+        recyclerViewGallery.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        imageGalleryAdapter = new ImageGalleryAdapter(getContext());
+        recyclerViewGallery.setAdapter(imageGalleryAdapter);
+        ItemClickSupport.addTo(recyclerViewGallery).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                ((CameraActivity) getActivity()).returnPhotoUri(imageGalleryAdapter.getItem(position).getImageUri(),true);
+            }
+        });
         mPreviewView = (SquareCameraPreview) view.findViewById(R.id.camera_preview_view);
         mPreviewView.getHolder().addCallback(CameraFragment.this);
 
@@ -182,7 +198,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
             autoFlashIcon.setText("Auto");
         } else if (Camera.Parameters.FLASH_MODE_ON.equalsIgnoreCase(mFlashMode)) {
             autoFlashIcon.setText("On");
-        }  else if (Camera.Parameters.FLASH_MODE_OFF.equalsIgnoreCase(mFlashMode)) {
+        } else if (Camera.Parameters.FLASH_MODE_OFF.equalsIgnoreCase(mFlashMode)) {
             autoFlashIcon.setText("Off");
         }
     }
@@ -196,7 +212,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         super.onSaveInstanceState(outState);
     }
 
-    private void resizeTopAndBtmCover( final View topCover, final View bottomCover) {
+    private void resizeTopAndBtmCover(final View topCover, final View bottomCover) {
         ResizeAnimation resizeTopAnimation
                 = new ResizeAnimation(topCover, mImageParameters);
         resizeTopAnimation.setDuration(800);
@@ -485,6 +501,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
 
     /**
      * A picture has been taken
+     *
      * @param data
      * @param camera
      */
