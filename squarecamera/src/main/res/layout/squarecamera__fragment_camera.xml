@@ -1,31 +1,86 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:last="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.desmond.squarecamera.CameraFragment">
 
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@android:color/black"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/change_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/squarecamera__spacing_normal"
+            android:src="@drawable/squarecamera__camera" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:text="@string/default_title" />
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:text="@string/default_subtitle" />
+
+        </LinearLayout>
+    </LinearLayout>
+
     <com.desmond.squarecamera.SquareCameraPreview
         android:id="@+id/camera_preview_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/camera_tools_view"
+        android:layout_below="@+id/top_bar" />
 
     <View
         android:id="@+id/cover_top_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/squarecamera__cover_start_height"
+        android:layout_gravity="top"
         android:background="@android:color/black" />
 
     <View
         android:id="@+id/cover_bottom_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/squarecamera__cover_start_height"
+        android:layout_alignParentBottom="true"
         android:background="@android:color/black" />
 
     <LinearLayout
         android:id="@+id/camera_tools_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@android:color/black"
         android:orientation="vertical"
@@ -45,14 +100,14 @@
             android:background="@android:color/black"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="4dp">
 
             <ImageView
-                android:id="@+id/change_camera"
+                android:id="@+id/gallery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/squarecamera__camera" />
+                android:src="@drawable/ic_photo_library_white_24dp" />
 
             <ImageView
                 android:id="@+id/capture_image_button"
@@ -93,4 +148,4 @@
     </LinearLayout>
 
 
-</FrameLayout>
+</RelativeLayout>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +15,6 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
 /**
@@ -63,7 +60,6 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
 
     }
 
-
     @Override
     public GalleryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.photos_list_item, parent, false);
@@ -72,13 +68,13 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
     }
 
     @Override
-    public void onBindViewHolder(final GalleryViewHolder holder, final int position) {
+    public void onBindViewHolder(GalleryViewHolder holder, final int position) {
 
         PickerTile pickerTile = getItem(position);
-        final Uri uri = pickerTile.getImageUri();
+        Uri uri = pickerTile.getImageUri();
         Picasso.with(context)
                 .load(uri)
-                .error(R.drawable.ic_gallery)
+                .error(R.drawable.ic_insert_photo_white_24dp)
                 .into(holder.iv_thumbnail);
     }
 
@@ -93,25 +89,10 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
 
     public static class PickerTile {
 
-        public static final int IMAGE = 1;
-        public static final int CAMERA = 2;
-        public static final int GALLERY = 3;
         protected final Uri imageUri;
-        protected final
-        @TileType
-        int tileType;
 
-        PickerTile(@SpecialTileType int tileType) {
-            this(null, tileType);
-        }
-
-        protected PickerTile(@Nullable Uri imageUri, @TileType int tileType) {
+        protected PickerTile(@NonNull Uri imageUri) {
             this.imageUri = imageUri;
-            this.tileType = tileType;
-        }
-
-        PickerTile(@NonNull Uri imageUri) {
-            this(imageUri, IMAGE);
         }
 
         @Nullable
@@ -119,51 +100,11 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
             return imageUri;
         }
 
-        @TileType
-        public int getTileType() {
-            return tileType;
-        }
-
-        @Override
-        public String toString() {
-            if (isImageTile()) {
-                return "ImageTile: " + imageUri;
-            } else if (isCameraTile()) {
-                return "CameraTile";
-            } else if (isGalleryTile()) {
-                return "PickerTile";
-            } else {
-                return "Invalid item";
-            }
-        }
-
-        public boolean isImageTile() {
-            return tileType == IMAGE;
-        }
-
-        public boolean isCameraTile() {
-            return tileType == CAMERA;
-        }
-
-        public boolean isGalleryTile() {
-            return tileType == GALLERY;
-        }
-
-        @IntDef({IMAGE, CAMERA, GALLERY})
-        @Retention(RetentionPolicy.SOURCE)
-        public @interface TileType {
-        }
-
-        @IntDef({CAMERA, GALLERY})
-        @Retention(RetentionPolicy.SOURCE)
-        public @interface SpecialTileType {
-        }
     }
 
     class GalleryViewHolder extends RecyclerView.ViewHolder {
 
-
-        ImageView iv_thumbnail;
+        private ImageView iv_thumbnail;
 
         public GalleryViewHolder(View view) {
             super(view);

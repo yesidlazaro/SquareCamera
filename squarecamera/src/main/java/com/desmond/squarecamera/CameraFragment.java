@@ -39,6 +39,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     public static final String CAMERA_ID_KEY = "camera_id";
     public static final String CAMERA_FLASH_KEY = "flash_mode";
     public static final String IMAGE_INFO = "image_info";
+    private static final int REQUEST_GALLERY = 1290;
 
     private static final int PICTURE_SIZE_MAX_WIDTH = 720;
     private static final int PREVIEW_SIZE_MAX_WIDTH = 720;
@@ -49,6 +50,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     private SquareCameraPreview mPreviewView;
     private SurfaceHolder mSurfaceHolder;
     private RecyclerView recyclerViewGallery;
+    private TextView textViewTitle;
+    private TextView textViewSubtitle;
     private boolean mIsSafeToTakePhoto = false;
     private ImageGalleryAdapter imageGalleryAdapter;
     private ImageParameters mImageParameters;
@@ -89,14 +92,6 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.squarecamera__fragment_camera, container, false);
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mOrientationListener.enable();
         recyclerViewGallery = (RecyclerView) view.findViewById(R.id.recyclerview);
         recyclerViewGallery.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
         recyclerViewGallery.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -105,9 +100,27 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         ItemClickSupport.addTo(recyclerViewGallery).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                ((CameraActivity) getActivity()).returnPhotoUri(imageGalleryAdapter.getItem(position).getImageUri(),true);
+                ((CameraActivity) getActivity()).returnPhotoUri(imageGalleryAdapter.getItem(position).getImageUri(), true);
             }
         });
+        textViewTitle = (TextView) view.findViewById(R.id.title);
+        textViewSubtitle = (TextView) view.findViewById(R.id.subtitle);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getActivity().getIntent().getBooleanExtra(CameraActivity.KEY_SHOW_TITLE, false)) {
+            textViewTitle.setVisibility(View.VISIBLE);
+            textViewSubtitle.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mOrientationListener.enable();
         mPreviewView = (SquareCameraPreview) view.findViewById(R.id.camera_preview_view);
         mPreviewView.getHolder().addCallback(CameraFragment.this);
 
@@ -187,6 +200,20 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
                 takePicture();
             }
         });
+
+        final ImageView takeOpenGallery = (ImageView) view.findViewById(R.id.gallery);
+        takeOpenGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGalleryActivity();
+            }
+        });
+    }
+
+    private void startGalleryActivity() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_GALLERY);
     }
 
     private void setupFlashMode() {
@@ -490,8 +517,11 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         if (resultCode != Activity.RESULT_OK) return;
 
         switch (requestCode) {
-            case 1:
-                Uri imageUri = data.getData();
+            case REQUEST_GALLERY:
+                Uri photoUri = data.getData();
+                if (photoUri != null) {
+                    ((CameraActivity) getActivity()).returnPhotoUri(photoUri, true);
+                }
                 break;
 
             default:
