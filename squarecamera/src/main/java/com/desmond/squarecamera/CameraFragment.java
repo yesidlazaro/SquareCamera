@@ -114,6 +114,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         if (getActivity().getIntent().getBooleanExtra(CameraActivity.KEY_SHOW_TITLE, false)) {
             textViewTitle.setVisibility(View.VISIBLE);
             textViewSubtitle.setVisibility(View.VISIBLE);
+            textViewTitle.setText(getActivity().getIntent().getStringExtra(CameraActivity.KEY_TITLE));
+            textViewSubtitle.setText(getActivity().getIntent().getStringExtra(CameraActivity.KEY_SUBTITLE));
         }
     }
 

@@ -10,6 +10,8 @@ import android.view.View;
 public class CameraActivity extends AppCompatActivity {
     public static final String KEY_FROM_GALLERY = "KEY_FROM_GALLERY";
     public static final String KEY_SHOW_TITLE = "KEY_SHOW_TITLE";
+    public static final String KEY_TITLE = "KEY_TITLE";
+    public static final String KEY_SUBTITLE = "KEY_SUBTITLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
