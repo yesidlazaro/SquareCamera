@@ -126,8 +126,6 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         mPreviewView = (SquareCameraPreview) view.findViewById(R.id.camera_preview_view);
         mPreviewView.getHolder().addCallback(CameraFragment.this);
 
-        final View topCoverView = view.findViewById(R.id.cover_top_view);
-        final View btnCoverView = view.findViewById(R.id.cover_bottom_view);
 
         mImageParameters.mIsPortrait =
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
@@ -143,10 +141,6 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
                     mImageParameters.mCoverWidth = mImageParameters.mCoverHeight
                             = mImageParameters.calculateCoverWidthHeight();
 
-//                    Log.d(TAG, "parameters: " + mImageParameters.getStringValues());
-//                    Log.d(TAG, "cover height " + topCoverView.getHeight());
-                    resizeTopAndBtmCover(topCoverView, btnCoverView);
-
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         mPreviewView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     } else {
@@ -154,14 +148,6 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
                     }
                 }
             });
-        } else {
-            if (mImageParameters.isPortrait()) {
-                topCoverView.getLayoutParams().height = mImageParameters.mCoverHeight;
-                btnCoverView.getLayoutParams().height = mImageParameters.mCoverHeight;
-            } else {
-                topCoverView.getLayoutParams().width = mImageParameters.mCoverWidth;
-                btnCoverView.getLayoutParams().width = mImageParameters.mCoverWidth;
-            }
         }
 
         final ImageView swapCameraBtn = (ImageView) view.findViewById(R.id.change_camera);

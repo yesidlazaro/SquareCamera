@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void requestForCameraPermission(View view) {
         final String permission = Manifest.permission.CAMERA;
-        final String permissionGallery = Manifest.permission.READ_EXTERNAL_STORAGE;
+        final String permissionGallery = Manifest.permission.WRITE_EXTERNAL_STORAGE;
         if (ContextCompat.checkSelfPermission(MainActivity.this, permission)
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this, permissionGallery)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
     private void launch() {
         Intent startCustomCameraIntent = new Intent(this, CameraActivity.class);
         startCustomCameraIntent.putExtra(CameraActivity.KEY_SHOW_TITLE, true);
+        startCustomCameraIntent.putExtra(CameraActivity.KEY_TITLE, "HELLO");
+        startCustomCameraIntent.putExtra(CameraActivity.KEY_SUBTITLE, "HELLO");
         startActivityForResult(startCustomCameraIntent, REQUEST_CAMERA);
     }
 

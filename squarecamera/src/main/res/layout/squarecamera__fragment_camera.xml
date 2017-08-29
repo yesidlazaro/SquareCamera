@@ -1,9 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:last="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.desmond.squarecamera.CameraFragment">
+
+    <com.desmond.squarecamera.SquareCameraPreview
+        android:id="@+id/camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/top_bar"
@@ -36,10 +41,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:text="@string/default_title"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
-                android:visibility="gone"
-                android:text="@string/default_title" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/subtitle"
@@ -48,34 +53,13 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:text="@string/default_subtitle"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
-                android:visibility="gone"
-                android:text="@string/default_subtitle" />
+                android:visibility="gone" />
 
         </LinearLayout>
     </LinearLayout>
-
-    <com.desmond.squarecamera.SquareCameraPreview
-        android:id="@+id/camera_preview_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/camera_tools_view"
-        android:layout_below="@+id/top_bar" />
-
-    <View
-        android:id="@+id/cover_top_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/squarecamera__cover_start_height"
-        android:layout_gravity="top"
-        android:background="@android:color/black" />
-
-    <View
-        android:id="@+id/cover_bottom_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/squarecamera__cover_start_height"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/black" />
 
     <LinearLayout
         android:id="@+id/camera_tools_view"
@@ -149,4 +133,4 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</FrameLayout>
