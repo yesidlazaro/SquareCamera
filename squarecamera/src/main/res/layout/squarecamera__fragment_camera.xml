@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@android:color/black"
-        android:gravity="center_horizontal"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="@dimen/squarecamera__padding_normal">
 
@@ -24,8 +24,8 @@
             android:id="@+id/change_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/squarecamera__spacing_micro"
-            android:layout_marginTop="@dimen/squarecamera__padding_normal"
             android:src="@drawable/squarecamera__camera" />
 
         <LinearLayout
@@ -44,7 +44,8 @@
                 android:text="@string/default_title"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/subtitle"
@@ -56,7 +57,8 @@
                 android:text="@string/default_subtitle"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
         </LinearLayout>
     </LinearLayout>
