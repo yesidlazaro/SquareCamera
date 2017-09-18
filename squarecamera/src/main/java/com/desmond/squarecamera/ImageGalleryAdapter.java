@@ -75,6 +75,8 @@ public class ImageGalleryAdapter extends RecyclerView.Adapter<ImageGalleryAdapte
         Picasso.with(context)
                 .load(uri)
                 .error(R.drawable.ic_insert_photo_white_24dp)
+                .resize(96,96)
+                .centerCrop()
                 .into(holder.iv_thumbnail);
     }
 
